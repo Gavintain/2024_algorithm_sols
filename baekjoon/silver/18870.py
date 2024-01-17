@@ -5,6 +5,8 @@ line2= sys.stdin.readline().strip()
 lst = line2.split()
 lst = [int(x) for x in lst]
 # unique_lst = list(dict.fromkeys(lst))
+## set과 다르게 dict은 lst에서 받은 원소들의 순서를 유지하는데 추가 오버헤드가 있음.
+## 둘 다 해시맵을 사용하긴 하나 dict는 키와 밸류 쌍으로 관리한다.
 unique_lst = list(set(lst))
 unique_lst.sort()
 dct = {unique_lst[i]:i for i in range(len(unique_lst))}
