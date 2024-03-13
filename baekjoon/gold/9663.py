@@ -1,46 +1,48 @@
 import sys
 import math
 
-# line1 = sys.stdin.readline().strip()
-# N = int(line1)
 
-# def sol_queen(N):
-#     sol_nums=0
-#     TABLE = [ None for _ in range(N)] ## 0~N-1번째 기물의 y좌표. x좌표는 각 기물의 순서와 같다.
-#     def conflict(num,y): ## num: 새로놓는 기물이 몇번째 기물인지 y: 새로놓는 기물의 y좌표
-#         for i in range(num):
-#             native_x = i
-#             native_y = TABLE[i]
-#             immigrant_x = num
-#             immigrant_y = y
-#             if abs(immigrant_x-native_x) == abs(immigrant_y-native_y) or native_y == immigrant_y:
-#                 return True
-#             else:
-#                 continue
-#         return 0
+## 기본적인 백트래킹 알고리즘.
+line1 = sys.stdin.readline().strip()
+N = int(line1)
 
-#     def n_queen(n): ## n: 몇번째 기물인지(0부터 시작)
-#         nonlocal sol_nums
-#         if n<1:
-#             for i in range(N):
-#                 TABLE[n] = i
-#                 n_queen(n+1)
-#                 TABLE[n] = None
-#         else:
-#             if n==N:
-#                 sol_nums+=1
-#                 return
-#             for y in range(N): ## y: 새로놓을 기물의 y좌표
-#                 if not conflict(n,y): ## 새로놓을 기물과 이전에 놓은 기물들이 서로 공격가능한지 확인.
-#                     TABLE[n] = y
-#                     n_queen(n+1)
-#                     TABLE[n] = None
+def sol_queen(N):
+    sol_nums=0
+    TABLE = [ None for _ in range(N)] ## 0~N-1번째 기물의 y좌표. x좌표는 각 기물의 순서와 같다.
+    def conflict(num,y): ## num: 새로놓는 기물이 몇번째 기물인지 y: 새로놓는 기물의 y좌표
+        for i in range(num):
+            native_x = i
+            native_y = TABLE[i]
+            immigrant_x = num
+            immigrant_y = y
+            if abs(immigrant_x-native_x) == abs(immigrant_y-native_y) or native_y == immigrant_y:
+                return True
+            else:
+                continue
+        return 0
+
+    def n_queen(n): ## n: 몇번째 기물인지(0부터 시작)
+        nonlocal sol_nums
+        if n<1:
+            for i in range(N):
+                TABLE[n] = i
+                n_queen(n+1)
+                TABLE[n] = None
+        else:
+            if n==N:
+                sol_nums+=1
+                return
+            for y in range(N): ## y: 새로놓을 기물의 y좌표
+                if not conflict(n,y): ## 새로놓을 기물과 이전에 놓은 기물들이 서로 공격가능한지 확인.
+                    TABLE[n] = y
+                    n_queen(n+1)
+                    TABLE[n] = None
                 
-#     n_queen(0)
+    n_queen(0)
     
-#     print(sol_nums)
+    print(sol_nums)
 
-# sol_queen(N)
+sol_queen(N)
 
 
 
@@ -97,6 +99,8 @@ import math
 #     return flag
 
 
+
+#### 테스트 통과 알고리즘
 line1 = sys.stdin.readline().strip()
 N = int(line1)
 
